@@ -284,6 +284,8 @@ void PointCloudOdometry::PublishPose(const gu::Transform3& pose,
 
   // Convert from gu::Transform3 to ROS's PoseStamped type and publish.
   geometry_msgs::PoseWithCovarianceStamped ros_pose;
+  ros_pose.header.frame_id = fixed_frame_id_;
+  ros_pose.header.stamp = stamp_;
   ros_pose.pose = gr::ToRosPoseWithCovariance(pose, cov_mat);
   pub.publish(ros_pose);
 }
